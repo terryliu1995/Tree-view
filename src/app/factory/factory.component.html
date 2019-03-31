@@ -1,0 +1,13 @@
+<div *ngFor="let factory of factories" class="ml-4" class="factory">
+  <div class="row">
+    <div class="col">
+      <h4>----{{factory?.title}}</h4>
+    </div>
+    <div class="col text-center">
+      <span class="badge badge-secondary" > {{factory?.min}} : {{factory?.max}}</span>
+    </div>
+  </div>
+  <div *ngFor="let child of factory?.children" >
+      <div class="child">----{{child}}</div>
+  </div>
+</div>

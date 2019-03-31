@@ -1,0 +1,18 @@
+
+  .child {
+    line-height: 0rem;
+    border-left-style: dashed;
+    margin-left: 2rem;
+    border-left-width: 1px;
+    padding-top: 2rem;
+  }
+
+  .factory {
+    border-left-style: dashed;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-left: 2rem;
+    border-left-width: 2px;
+
+  }
+  
