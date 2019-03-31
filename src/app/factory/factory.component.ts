@@ -19,8 +19,7 @@ export class FactoryComponent implements OnInit {
   rangeValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
     const min = control.get('min');
     const max = control.get('max');
-  
-    return min && max && min.value > max.value ? { range: 'Range is invalid' } : null;
+    return min && max && min.value && max.value && min.value > max.value ? { range: 'Range is invalid' } : null;
   };
   
   constructor(private modalService: NgbModal) { }

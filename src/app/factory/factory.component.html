@@ -31,8 +31,8 @@
 <!-- Modal -->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title" *ngIf="selectedIndex">Update Factory</h4>
-    <h4 class="modal-title" id="modal-basic-title" *ngIf="!selectedIndex">Add Factory</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="selectedIndex != null">Update Factory</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="selectedIndex ==null">Add Factory</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -41,8 +41,8 @@
     <form [formGroup]="factoryForm" (submit)="saveFactory(factoryForm.value)">
       <div class="form-group">
         <label>Factory Title</label>
-        <input id = "title" name="title" class="form-control"  type="text" formControlName="title" required />
-        <div *ngIf="factoryForm.get('title').errors?.required" class="alert alert-danger" role="alert">Title is required</div>
+        <input id = "title" name="title" class="form-control"  type="text" formControlName="title" required #title/>
+        <div *ngIf="title.errors?.required && (title.dirty || title.touched)" class="alert alert-danger" role="alert">Title is required</div>
       </div>
       <div class="form-group">
         <label>Amount To Generate</label>
