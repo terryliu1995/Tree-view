@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FactoryComponent } from './factory/factory.component';
+import { AppRoutingModule } from './app-routing.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,7 +13,10 @@ import { FactoryComponent } from './factory/factory.component';
     FactoryComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgbModule,
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
