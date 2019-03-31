@@ -1,14 +1,14 @@
 
   .child {
-    line-height: 0rem;
-    border-left-style: dashed;
+    line-height: 0.4rem;
+    border-left-style: solid ;
     margin-left: 2rem;
     border-left-width: 1px;
     padding-top: 2rem;
   }
 
   .factory {
-    border-left-style: dashed;
+    border-left-style: solid ;
     padding-top: 1rem;
     padding-bottom: 1rem;
     margin-left: 2rem;

@@ -1,19 +1,26 @@
-<div *ngFor="let factory of factories" class="ml-4" class="factory">
+<div *ngFor="let factory of factories; let index = index " class="ml-4" class="factory">
   <div class="row">
-    <div class="col-2">
-      <h4>----{{factory?.title}}</h4>
+    <div class="col-3">
+
+      —— <b id="{{ 'label_' + index}}">{{factory.title}} </b><button id="{{'edit_'+index}}" class="btn btn-link"
+        (click)="editName(index)"><i class="fas fa-edit"></i></button>
+      <input size=5 hidden id="{{'input_'+index}}" required hidden type="text" [(ngModel)]="factory.title"> <button hidden id="{{'done_'+index}}"
+        class="btn btn-link" (click)="saveName(index)"> <i class="fas fa-check"></i></button>
+
     </div>
     <div class="col-2 text-center">
       <span class="badge badge-secondary"> {{factory?.min}} : {{factory?.max}}</span>
     </div>
-    <div class="col-2 ">
-      <button type="button" class="btn btn-primary" (click)="open(content, factory)"><i
-          class="fas fa-edit"></i></button>
-      <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+
+    <!-- action -->
+    <div class="col-2 mt">
+      <button type="button" class="btn btn-primary mr-1" (click)="open(content, index)"><i class="fas fa-cog "></i>
+      </button>
+      <button type="button" class="btn btn-danger" (click)="delete(factory)"><i class="fas fa-trash-alt"></i></button>
     </div>
   </div>
   <div *ngFor="let child of factory?.children">
-    <div class="child">----{{child}}</div>
+    <div class="child">—— {{child}}</div>
   </div>
 </div>
 <div class="row">
@@ -24,22 +31,23 @@
 <!-- Modal -->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title" *ngIf="selectedFactory">Update Factory</h4>
-    <h4 class="modal-title" id="modal-basic-title" *ngIf="!selectedFactory">Add Factory</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="selectedIndex">Update Factory</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="!selectedIndex">Add Factory</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form  [formGroup]="factoryForm"  (submit)="saveFactory()">
+    <form [formGroup]="factoryForm" (submit)="saveFactory(factoryForm.value)">
       <div class="form-group">
         <label>Factory Title</label>
-        <input name="factoryTitle" class="form-control" type="text"  formControlName="title" required />
+        <input id = "title" name="title" class="form-control"  type="text" formControlName="title" required />
+        <div *ngIf="factoryForm.get('title').errors?.required" class="alert alert-danger" role="alert">Title is required</div>
       </div>
       <div class="form-group">
         <label>Amount To Generate</label>
         <select name="childAmount" class="form-control" required formControlName="amount">
-          <option *ngFor="let amount of amountArray; let i = index" value="{{amount}}"  >
+          <option *ngFor="let amount of amountArray; let i = index" value="{{amount}}">
             {{amount}}
           </option>
         </select>
@@ -48,16 +56,17 @@
         <div class="row">
           <div class="col-6">
             <label>Min</label>
-            <input name="childMin" class="form-control" type="number" required formControlName="min"/>
+            <input name="childMin" class="form-control" type="number" required formControlName="min" />
           </div>
           <div class="col-6">
             <label>Max</label>
-            <input class="form-control" type="number" required formControlName="max"/>
+            <input class="form-control" type="number" required formControlName="max" />
           </div>
         </div>
+        <div *ngIf="factoryForm.errors?.range" class="alert alert-danger" role="alert">{{factoryForm.errors.range}}</div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" >Save</button>
+        <button type="submit" [disabled]="!factoryForm.valid" class="btn btn-success">Save</button>
       </div>
     </form>
   </div>

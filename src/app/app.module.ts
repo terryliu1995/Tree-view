@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { FactoryComponent } from './factory/factory.component';
 import { AppRoutingModule } from './app-routing.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     NgbModule,
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule
   ],
