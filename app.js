@@ -16,17 +16,17 @@ const helmet = require('helmet')
 
 // Connect to mlab mongodb
 
-// const db = `mongodb://${mongoUser}:${mongoPassword}@ds229552.mlab.com:29552/passportchallenge`;
-const db = `mongodb://localhost:27017/factory`;
+const db = `mongodb+srv://root:root@cluster0-cxwv1.mongodb.net/mydb?retryWrites=true`;
+// const db = `mongodb+srv://${mongoUser}:${mongoPassword}@cluster0-cxwv1.mongodb.net/mydb?retryWrites=true`;
 
 useMongoClient: true;
 mongoose.Promise = global.Promise;
 //connect and show any mongoose errors
-mongoose.connect(db, { useNewUrlParser: true }, function(err) {
-  if(err) {
-      console.log('Error connecting');
+mongoose.connect(db, { useNewUrlParser: true }, function (err) {
+  if (err) {
+    console.log('Error connecting');
   }
-  else{
+  else {
     console.log('Mongoose connection successful.')
   }
 });
@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 // API location
 
 
-app.use("/tree", tree);
+app.use("/api", tree);
 
 
 
@@ -59,15 +59,5 @@ app.get('*', (req, res) => {
 var port = process.env.PORT || 4200;
 
 
-module.exports.sendFactoryInfo = function() {
-  Factory.find({}, function(err, info) {
-    if(err) {
-      console.log("there was an error", err);
-      return;
-    }
-    //send to everyone
-    io.emit("currentFactoryInfo", info);
-  });
-}
 
 server.listen(port, () => console.log("connected and listening on port ", port));

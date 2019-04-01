@@ -13,4 +13,4 @@ var factorySchema = mongoose.Schema({
 
 
 // create the model 
-module.exports = mongoose.model('Factory', factorySchema);
+module.exports = mongoose.model('factory', factorySchema);
